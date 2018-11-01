@@ -2,6 +2,7 @@
 
 set -eu
 
+docker rm -f node-web-app || true
 docker build -t vladlan/node-web-app .
 
 #--rm		Automatically remove the container when it exits

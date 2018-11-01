@@ -42,8 +42,8 @@ app.post('/generateRoomIdLink', function(req, res) {
     let output = `${HOST}/${roomId}.html`;
 
     /// Creating file with a link
-    let fileName = `${roomId}.html`;
-    // let fileName = `/var/lib/ftp/incoming/${roomId}.html`;
+    // let fileName = `${roomId}.html`;
+    let fileName = `/var/lib/ftp/incoming/${roomId}.html`;
     let content = `<!DOCTYPE html><html>
 <head>
 	<title></title>
@@ -54,8 +54,6 @@ app.post('/generateRoomIdLink', function(req, res) {
 <body>
 </body>
 </html>`;
-    console.log(roomIds);
-
     if (!roomIds.includes(fileName)) {
         writeFile(fileName, content)
             .then(() => {
