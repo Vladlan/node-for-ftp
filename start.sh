@@ -2,6 +2,7 @@
 
 set -eu
 
+#if container exists - remove
 docker rm -f node-web-app || true
 docker build -t vladlan/node-web-app .
 
