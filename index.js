@@ -7,7 +7,7 @@ var app = express();
 const writeFile = util.promisify(fs.writeFile);
 
 const HOST = 'ftp://localhost:32021/incoming';
-const TIMEOUT = 43200; // in milliseconds 12 hours
+const TIMEOUT = 43200000; // in milliseconds 12 hours
 let roomIds = [];
 
 const deleteFile = (file) => {
