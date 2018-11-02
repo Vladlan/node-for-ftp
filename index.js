@@ -6,7 +6,7 @@ var app = express();
 
 const writeFile = util.promisify(fs.writeFile);
 
-const HOST = 'ftp://localhost:32021/incoming';
+const HOST = 'ftp://46.101.213.230:32021/incoming';
 const TIMEOUT = 43200000; // in milliseconds 12 hours
 let roomIds = [];
 
@@ -30,7 +30,7 @@ app.all('/*', function(req, res, next) {
     next();
 });
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.post('/generateRoomIdLink', function(req, res) {
@@ -60,10 +60,10 @@ app.post('/generateRoomIdLink', function(req, res) {
                 console.log(`file ${fileName} has been created!`);
                 setTimeout(() => deleteFile(fileName), TIMEOUT);
                 roomIds.push(fileName);
-                res.status(200).send(output);
+                res.status(200).send({ftpLink:output});
             }).catch((err) => {
             console.log(err);
-            res.status(200).send('Something happened on server. Sorry...');
+            res.status(500).send('Something happened on server. Sorry...');
         });
     } else {
         res.status(500).send('Something happened on server. Sorry...');
