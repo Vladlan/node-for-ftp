@@ -3,7 +3,7 @@ const util = require('util');
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
-let redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
+//let redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 
 const writeFile = util.promisify(fs.writeFile);
 
@@ -31,9 +31,13 @@ app.all('/*', function(req, res, next) {
     next();
 });
 
-app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+//app.use(redirectToHTTPS([/localhost:6069/]));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
 
 app.post('/generateRoomIdLink', function(req, res) {
     console.log(req.body);
